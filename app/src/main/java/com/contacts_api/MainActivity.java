@@ -22,7 +22,7 @@ import java.net.URL;
 public class MainActivity extends AppCompatActivity {
 
     private TextView tv_jsonlist;
-    private Button btn_hit;
+    Button btn_hit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,8 +54,8 @@ public class MainActivity extends AppCompatActivity {
                 InputStream steam = httpURLConnection.getInputStream();
                 reader = new BufferedReader(new InputStreamReader(steam));
 
-                StringBuffer buffer = new StringBuffer();
-                String line = "";
+                StringBuilder buffer = new StringBuilder();
+                String line;
                 while ((line = reader.readLine()) != null) {
                     buffer.append(line);
                 }
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 JSONObject jsonRootObject = new JSONObject(str);
                 JSONArray jsonArray = jsonRootObject.optJSONArray("contacts");
 
-                StringBuffer stringBuffer = new StringBuffer();
+                StringBuilder stringBuilder = new StringBuilder();
                 for (int i = 0; i < jsonArray.length(); i++) {
 
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -74,9 +74,9 @@ public class MainActivity extends AppCompatActivity {
                     String Gender = jsonObject.getString("gender");
 //                    String Mobile = jsonObject.getString("mobile");
 
-                    stringBuffer.append(Name + " - " + year + "\n" + Gender + "\n\n");
+                    stringBuilder.append(Name + " - " + year + "\n" + Gender + "\n\n");
                 }
-                return stringBuffer.toString();
+                return stringBuilder.toString();
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
